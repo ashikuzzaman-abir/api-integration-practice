@@ -12,17 +12,17 @@ export const authSlice = createSlice({
 	name: "auth",
 	initialState: {
 		token:
-			typeof window !== "undefined" && localStorage.getItem(TOKEN_NAME) != null
+			typeof window !== "undefined" && localStorage.getItem(TOKEN_NAME) != "null"
 				? JSON.parse(localStorage.getItem(TOKEN_NAME)!)
 				: null,
 		loggedIn:
-			typeof window !== "undefined" && localStorage.getItem(TOKEN_NAME) !== null
+			typeof window !== "undefined" && localStorage.getItem(TOKEN_NAME) !== "null"
 				? true
 				: false,
 	},
 	reducers: {
 		logout: (state, action) => {
-			localStorage.setItem(TOKEN_NAME, null)!;
+			localStorage.setItem(TOKEN_NAME, String(null))!;
 			state.token = null;
 			state.loggedIn = false;
 			document.location.href = "/login";
@@ -36,14 +36,14 @@ export const authSlice = createSlice({
 	},
 });
 
-export const loginAction = (token: any) => async (dispatch) => {
+export const loginAction = (token: any) => async (dispatch:any) => {
 	localStorage.setItem(TOKEN_NAME, JSON.stringify(token));
 	dispatch({ type: login, payload: token });
 	//document.location.href = '/';
 };
 
-export const logoutAction = async (dispatch) => {
-	localStorage.setItem(TOKEN_NAME, null)!;
+export const logoutAction = async (dispatch:any) => {
+	localStorage.setItem(TOKEN_NAME, String(null))!;
 	dispatch({ type: logout });
 	// document.location.href = '/';
 };
