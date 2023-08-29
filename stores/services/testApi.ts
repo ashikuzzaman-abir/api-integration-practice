@@ -10,7 +10,7 @@ export const testApi = createApi({
 	reducerPath: "testApi",
 	baseQuery: fetchBaseQuery({
 		baseUrl: `${lib.api.backend}`,
-		prepareHeaders: (headers: any, { getState }: { getState: any }) => {
+		prepareHeaders: (headers: any, { getState }: any) => {
 			const token = getState().auth.token;
 			if (token) {
 				headers.set("authorization", token);

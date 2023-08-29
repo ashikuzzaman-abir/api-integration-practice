@@ -1,24 +1,16 @@
+import  authReducer  from '@/stores/slices/authSlice';
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
-
-
-
+import { testApi } from "./services/testApi";
 
 export const store = configureStore({
 	reducer: {
-		sidebar: sidebarReducer,
 		auth: authReducer,
-		cart: testCartReducer,
-		purchaseCart: purchaseCartReducer,
-		[authApi.reducerPath]: authApi.reducer,
-		[inventoryApi.reducerPath]: inventoryApi.reducer,
-		[supplierCustomerApi.reducerPath]: supplierCustomerApi.reducer,
+		[testApi.reducerPath]: testApi.reducer,
 	},
 	middleware: (getDefaultMiddleware) =>
-		getDefaultMiddleware()
-			.concat(authApi.middleware)
-			.concat(inventoryApi.middleware)
-			.concat(supplierCustomerApi.middleware),
+		getDefaultMiddleware().concat(testApi.middleware).concat(),
+
 	devTools: true,
 });
 
